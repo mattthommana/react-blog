@@ -1,39 +1,14 @@
 import React from 'react';
 import { useParams, Navigate, Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
-import { MDXProvider } from '@mdx-js/react';
 import { useBlog } from '../hooks/useBlog';
 import { useAuth } from '../context/AuthContext';
 import { useSubscription } from '../context/SubscriptionContext';
+import Head from '../components/layout/Head';
 import BlogHeader from '../components/blog/BlogHeader';
-import MathRenderer from '../components/blog/MathRenderer';
+import MarkdownRenderer from '../components/blog/MarkdownRenderer';
 import LoadingSpinner from '../components/layout/LoadingSpinner';
 import ErrorMessage from '../components/layout/ErrorMessage';
 import SubscriptionCTA from '../components/payments/SubscriptionCTA';
-
-// Same custom components for MDX as in BlogPostPage
-const components = {
-  h1: (props: any) => <h1 className="text-3xl font-bold mt-8 mb-4" {...props} />,
-  h2: (props: any) => <h2 className="text-2xl font-bold mt-6 mb-3" {...props} />,
-  h3: (props: any) => <h3 className="text-xl font-bold mt-5 mb-2" {...props} />,
-  p: (props: any) => <p className="my-4" {...props} />,
-  a: (props: any) => <a className="text-blue-600 dark:text-blue-400 hover:underline" {...props} />,
-  ul: (props: any) => <ul className="list-disc pl-5 my-4" {...props} />,
-  ol: (props: any) => <ol className="list-decimal pl-5 my-4" {...props} />,
-  blockquote: (props: any) => (
-    <blockquote className="border-l-4 border-gray-300 pl-4 my-4 italic" {...props} />
-  ),
-  code: (props: any) => {
-    const { children, className } = props;
-    return (
-      <pre className="bg-gray-100 dark:bg-gray-800 p-4 rounded-md overflow-x-auto my-4">
-        <code className={className}>{children}</code>
-      </pre>
-    );
-  },
-  math: (props: any) => <MathRenderer math={props.children} />,
-  inlineMath: (props: any) => <MathRenderer math={props.children} inline={true} />,
-};
 
 const PremiumBlogPostPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -69,6 +44,11 @@ const PremiumBlogPostPage: React.FC = () => {
   if (!hasActiveSubscription) {
     return (
       <div className="max-w-3xl mx-auto px-4 py-8">
+        <Head 
+          title={`${post.title} | Premium Content | Matter St. Blog`}
+          description={post.description}
+        />
+        
         <div className="animate">
           <Link 
             to="/blog" 
@@ -100,15 +80,12 @@ const PremiumBlogPostPage: React.FC = () => {
     );
   }
 
-  // The Content component is the React component generated from MDX
-  const Content = post.content as React.ComponentType;
-
   return (
     <>
-      <Helmet>
-        <title>{post.title} | Premium Content | Matter St. Blog</title>
-        <meta name="description" content={post.description} />
-      </Helmet>
+      <Head 
+        title={`${post.title} | Premium Content | Matter St. Blog`}
+        description={post.description}
+      />
       
       <div className="animate">
         <Link 
@@ -131,11 +108,7 @@ const PremiumBlogPostPage: React.FC = () => {
       
       <article className="max-w-3xl mx-auto mt-8">
         <BlogHeader post={post} />
-        <MDXProvider components={components}>
-          <div className="prose prose-lg max-w-none dark:prose-invert">
-            <Content />
-          </div>
-        </MDXProvider>
+        <MarkdownRenderer content={post.content as string} />
       </article>
     </>
   );

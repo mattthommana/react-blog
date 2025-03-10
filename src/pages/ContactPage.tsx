@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
+import Head from '../components/layout/Head'
 
 const ContactPage: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -49,10 +49,10 @@ const ContactPage: React.FC = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Contact | Matter St. Blog</title>
-        <meta name="description" content="Contact the author of Matter St. Blog" />
-      </Helmet>
+      <Head
+        title="Contact | Matter St. Blog"
+        description="Contact the author of Matter St. Blog"
+      />
 
       <div className="max-w-2xl mx-auto">
         <h1 className="text-3xl font-semibold mb-6">Contact Me</h1>

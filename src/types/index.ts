@@ -3,7 +3,7 @@ export interface BlogPost {
   slug: string;
   title: string;
   description: string;
-  content: string | React.ComponentType;
+  content: string; // Changed from string | React.ComponentType to just string
   author: string;
   date: string;
   tags: string[];

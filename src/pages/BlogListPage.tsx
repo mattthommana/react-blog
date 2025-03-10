@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Helmet } from 'react-helmet-async';
+import Head from '../components/layout/Head'
 import { useBlog } from '../hooks/useBlog';
 import { useSubscription } from '../context/SubscriptionContext';
 import BlogCard from '../components/blog/BlogCard';
@@ -48,10 +48,10 @@ const BlogListPage: React.FC = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Blog | Matter St.</title>
-        <meta name="description" content="Browse all blog posts from Matter St." />
-      </Helmet>
+      <Head
+        title="Blog | Matter St. Blog"
+        description="Browse the Matter St. Blog"
+      />
 
       <div className="space-y-10">
         <div className="font-semibold text-2xl text-black dark:text-white">

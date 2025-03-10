@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
 import { useBlog } from '../hooks/useBlog';
 import BlogCard from '../components/blog/BlogCard';
 import AuthorProfile from '../components/AuthorProfile';
 import LoadingSpinner from '../components/layout/LoadingSpinner';
+import Head from '../components/layout/Head';
 
 const HomePage: React.FC = () => {
   const { posts, isLoading, error } = useBlog({ isPremium: false });
@@ -18,10 +18,10 @@ const HomePage: React.FC = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Matter St. Blog - Home</title>
-        <meta name="description" content="A blog about software, performance, and engineering." />
-      </Helmet>
+      <Head 
+        title="Matter St. Blog - Home"
+        description="A blog about software, performance, and engineering."
+      />
 
       <div className="space-y-12">
         <section className="text-center">

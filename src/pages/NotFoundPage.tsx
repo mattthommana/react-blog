@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
+import Head from '../components/layout/Head'
 
 const NotFoundPage: React.FC = () => {
   return (
     <>
-      <Helmet>
-        <title>Page Not Found | Matter St. Blog</title>
-        <meta name="description" content="The page you're looking for doesn't exist." />
-      </Helmet>
+      <Head
+        title="Page Not Found | Matter St. Blog"
+        description="The page you're looking for doesn't exist."
+      />
 
       <div className="max-w-md mx-auto text-center py-12">
         <h1 className="text-9xl font-bold text-gray-300 dark:text-gray-700">404</h1>

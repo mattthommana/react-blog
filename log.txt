@@ -1,0 +1,25 @@
+
+> typesafe-blog@1.0.0 build
+> tsc --noEmit && vite build
+
+src/components/blog/MarkdownRenderer.tsx(2,22): error TS2307: Cannot find module 'markdown-to-jsx' or its corresponding type declarations.
+src/components/blog/MarkdownRenderer.tsx(65,29): error TS7031: Binding element 'children' implicitly has an 'any' type.
+src/components/blog/MarkdownRenderer.tsx(70,29): error TS7031: Binding element 'children' implicitly has an 'any' type.
+src/components/blog/MarkdownRenderer.tsx(75,29): error TS7031: Binding element 'children' implicitly has an 'any' type.
+src/components/blog/MarkdownRenderer.tsx(80,29): error TS7031: Binding element 'children' implicitly has an 'any' type.
+src/components/blog/MarkdownRenderer.tsx(85,29): error TS7031: Binding element 'children' implicitly has an 'any' type.
+src/components/blog/MarkdownRenderer.tsx(95,29): error TS7031: Binding element 'children' implicitly has an 'any' type.
+src/components/layout/Header.tsx(11,9): error TS6133: 'navigate' is declared but its value is never read.
+src/pages/HomePage.tsx(15,22): error TS2345: Argument of type 'BlogPost[]' is not assignable to parameter of type 'SetStateAction<never[]>'.
+  Type 'BlogPost[]' is not assignable to type 'never[]'.
+    Type 'BlogPost' is not assignable to type 'never'.
+src/pages/HomePage.tsx(57,31): error TS2339: Property 'id' does not exist on type 'never'.
+src/pages/ProfilePage.tsx(3,24): error TS2307: Cannot find module 'react-helmet-async' or its corresponding type declarations.
+src/pages/SubscriptionPage.tsx(2,1): error TS6133: 'Navigate' is declared but its value is never read.
+src/pages/SubscriptionPage.tsx(3,24): error TS2307: Cannot find module 'react-helmet-async' or its corresponding type declarations.
+src/utils/markdownUtils.ts(45,17): error TS2339: Property 'startsWith' does not exist on type 'string | boolean'.
+  Property 'startsWith' does not exist on type 'false'.
+src/utils/markdownUtils.ts(45,42): error TS2339: Property 'endsWith' does not exist on type 'string | boolean'.
+  Property 'endsWith' does not exist on type 'false'.
+src/utils/markdownUtils.ts(47,30): error TS2345: Argument of type 'string | boolean' is not assignable to parameter of type 'string'.
+  Type 'boolean' is not assignable to type 'string'.

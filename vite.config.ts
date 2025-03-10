@@ -1,13 +1,13 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import { resolve } from 'path';
-// import mdx from 'vite-plugin-mdx';
+import mdx from 'vite-plugin-mdx';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     react(),
-    // mdx() // Enable MDX support
+    mdx() // Enable MDX support
   ],
   resolve: {
     alias: {
@@ -39,9 +39,10 @@ export default defineConfig({
   },
   // Configure environment variables
   define: {
-    'process.env.AUTH0_DOMAIN': JSON.stringify(process.env.AUTH0_DOMAIN),
-    'process.env.AUTH0_CLIENT_ID': JSON.stringify(process.env.AUTH0_CLIENT_ID),
-    'process.env.STRIPE_PUBLIC_KEY': JSON.stringify(process.env.STRIPE_PUBLIC_KEY),
-    'process.env.API_ENDPOINT': JSON.stringify(process.env.API_ENDPOINT || '/api')
+    'import.meta.VITE_AUTH0_DOMAIN': JSON.stringify(process.env.AUTH0_DOMAIN),
+    'import.meta.VITE_AUTH0_CLIENT_ID': JSON.stringify(process.env.AUTH0_CLIENT_ID),
+    'import.meta.VITE_AUTH0_AUDIENCE': JSON.stringify(process.env.AUTH0_AUDIENCE),
+    'import.meta.VITE_STRIPE_PUBLIC_KEY': JSON.stringify(process.env.STRIPE_PUBLIC_KEY),
+    'import.meta.VITE_API_ENDPOINT': JSON.stringify(process.env.API_ENDPOINT || '/api')
   }
 });

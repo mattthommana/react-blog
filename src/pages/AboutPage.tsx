@@ -1,14 +1,14 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
+import Head from '../components/layout/Head'
 import AuthorProfile from '../components/AuthorProfile';
 
 const AboutPage: React.FC = () => {
   return (
     <>
-      <Helmet>
-        <title>About | Matter St. Blog</title>
-        <meta name="description" content="About the author of Matter St. Blog" />
-      </Helmet>
+      <Head
+        title="About | Matter St. Blog"
+        description="About the author of Matter St. Blog"
+      />
 
       <div className="space-y-12">
         <h1 className="text-3xl font-semibold text-center">About The Author</h1>
