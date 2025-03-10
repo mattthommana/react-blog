@@ -1,0 +1,163 @@
+---
+title: "Advanced TypeScript Patterns for React"
+description: "Master complex TypeScript patterns to build more robust React applications"
+author: "Matthew Thommana"
+date: "2025-03-05"
+tags: ["typescript", "react", "advanced", "patterns"]
+isPremium: true
+---
+
+# Advanced TypeScript Patterns for React
+
+This premium article explores sophisticated TypeScript patterns that will enhance your React applications.
+
+## Generic Components
+
+One of the most powerful features of TypeScript is generics. They allow you to create reusable components that work with a variety of types.
+
+```tsx
+interface SelectProps<T> {
+  items: T[];
+  getLabel: (item: T) => string;
+  getValue: (item: T) => string | number;
+  onChange: (value: T) => void;
+  selectedValue?: T;
+}
+
+export function Select<T>({
+  items,
+  getLabel,
+  getValue,
+  onChange,
+  selectedValue
+}: SelectProps<T>) {
+  return (
+    <select
+      value={selectedValue ? getValue(selectedValue).toString() : ''}
+      onChange={(e) => {
+        const selectedItem = items.find(
+          item => getValue(item).toString() === e.target.value
+        );
+        if (selectedItem) {
+          onChange(selectedItem);
+        }
+      }}
+    >
+      {items.map(item => (
+        <option key={getValue(item).toString()} value={getValue(item).toString()}>
+          {getLabel(item)}
+        </option>
+      ))}
+    </select>
+  );
+}
+```
+
+## Discriminated Unions for State Management
+
+Discriminated unions are excellent for managing complex state in React applications:
+
+```tsx
+type State = 
+  | { status: 'idle' }
+  | { status: 'loading' }
+  | { status: 'success'; data: User[] }
+  | { status: 'error'; error: string };
+
+function UserList() {
+  const [state, setState] = useState<State>({ status: 'idle' });
+
+  useEffect(() => {
+    setState({ status: 'loading' });
+    
+    fetchUsers()
+      .then(users => setState({ status: 'success', data: users }))
+      .catch(error => setState({ status: 'error', error: error.message }));
+  }, []);
+
+  // TypeScript ensures we handle all possible states
+  switch (state.status) {
+    case 'idle':
+      return <div>Click to load users</div>;
+    case 'loading':
+      return <div>Loading...</div>;
+    case 'success':
+      return (
+        <ul>
+          {state.data.map(user => (
+            <li key={user.id}>{user.name}</li>
+          ))}
+        </ul>
+      );
+    case 'error':
+      return <div>Error: {state.error}</div>;
+  }
+}
+```
+
+## Advanced Type Utilities
+
+TypeScript provides powerful utility types that can help build more flexible components:
+
+<math>
+\text{Let's define: } T \subseteq U \iff \forall x \in T \implies x \in U
+</math>
+
+```tsx
+// Extract specific properties from an interface
+type UserProfile = Pick<User, 'name' | 'email' | 'avatar'>;
+
+// Make some properties optional
+type PartialUser = Partial<User>;
+
+// Make all properties required
+type RequiredUser = Required<User>;
+
+// Create a readonly version
+type ReadonlyUser = Readonly<User>;
+
+// Extract the return type from a function
+type FetchUsersResult = ReturnType<typeof fetchUsers>;
+```
+
+## Creating Complex Type Hierarchies
+
+For complex applications, you often need to build detailed type hierarchies:
+
+```tsx
+// Base entity interface
+interface Entity {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+// User interface extending Entity
+interface User extends Entity {
+  name: string;
+  email: string;
+  role: 'admin' | 'editor' | 'viewer';
+}
+
+// Blog post interface extending Entity
+interface BlogPost extends Entity {
+  title: string;
+  content: string;
+  authorId: string;
+  published: boolean;
+  tags: string[];
+}
+
+// Comment interface extending Entity
+interface Comment extends Entity {
+  postId: string;
+  userId: string;
+  content: string;
+}
+```
+
+## Conclusion
+
+These advanced TypeScript patterns will help you build more robust React applications with fewer bugs and better developer experience. By leveraging TypeScript's powerful type system, you can create more maintainable and scalable code.
+
+In our next premium article, we'll explore how to combine these patterns with state management libraries like Redux and Zustand.

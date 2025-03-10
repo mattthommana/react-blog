@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+  
+  body {
+    @apply bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  .nav-link {
+    @apply relative my-2 text-sm font-medium hover:text-gray-800 dark:hover:text-gray-300;
+  }
+  .nav-link::after {
+    @apply content-[''] bg-blue-500 dark:bg-purple-500 h-[3.5px] w-[0%] left-0 -bottom-[6px] rounded-md absolute duration-300;
+  }
+  .nav-link:hover::after {
+    @apply w-[100%];
+  }
+}
+
+@layer utilities {
+  .animate {
+    @apply transform transition-transform duration-200 ease-in-out hover:-translate-y-0.5;
+  }
+}
+
+.prose {
+  @apply max-w-none;
+}
+
+.prose code {
+  @apply text-gray-800 dark:text-gray-200 bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded;
+}
+
+.prose pre code {
+  @apply text-gray-200 dark:text-gray-300 bg-transparent p-0;
+}
+
+.prose img {
+  @apply mx-auto rounded-lg;
+}
+
+.prose a {
+  @apply text-blue-600 dark:text-blue-400 font-medium no-underline hover:underline;
+}
+
+.prose h1, 
+.prose h2, 
+.prose h3,
+.prose h4 {
+  @apply font-semibold text-black dark:text-white scroll-mt-24;
+}
+
+.prose blockquote {
+  @apply border-l-4 border-gray-300 dark:border-gray-700 pl-4 italic;
+}
+
+.prose ul {
+  @apply list-disc pl-5 my-4;
+}
+
+.prose ol {
+  @apply list-decimal pl-5 my-4;
+}

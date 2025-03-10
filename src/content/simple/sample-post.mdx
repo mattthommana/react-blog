@@ -1,0 +1,71 @@
+---
+title: "Introduction to TypeScript and React"
+description: "Learn the basics of using TypeScript with React for type-safe applications"
+author: "Matthew Thommana"
+date: "2025-03-01"
+tags: ["typescript", "react", "web development"]
+isPremium: false
+---
+
+# Introduction to TypeScript and React
+
+TypeScript has become an essential tool for building React applications. It provides static typing that helps catch errors early during development rather than at runtime.
+
+## Why TypeScript?
+
+JavaScript is dynamically typed, which means variables can change types. This flexibility can lead to bugs that are difficult to track down. TypeScript solves this problem by adding static type checking.
+
+<math>
+f(x) = \int_{-\infty}^{\infty} \hat{f}(\xi)\,e^{2 \pi i \xi x} \, d\xi
+</math>
+
+The above equation represents the Fourier transform, which is a mathematical concept often used in signal processing. While not directly related to TypeScript, it demonstrates the math rendering capabilities of our blog!
+
+## Getting Started with TypeScript in React
+
+Here's a simple React component written in TypeScript:
+
+```tsx
+import React, { useState } from 'react';
+
+interface CounterProps {
+  initialCount: number;
+}
+
+const Counter: React.FC<CounterProps> = ({ initialCount }) => {
+  const [count, setCount] = useState<number>(initialCount);
+
+  const increment = () => setCount(count + 1);
+  const decrement = () => setCount(count - 1);
+
+  return (
+    <div>
+      <h2>Count: {count}</h2>
+      <button onClick={increment}>Increment</button>
+      <button onClick={decrement}>Decrement</button>
+    </div>
+  );
+};
+
+export default Counter;
+```
+
+Notice how we define the `CounterProps` interface to specify the props that our component accepts.
+
+## Type Safety in Action
+
+TypeScript helps us catch errors like this:
+
+```tsx
+// This would cause a compile-time error
+<Counter initialCount="5" />
+
+// This is correct
+<Counter initialCount={5} />
+```
+
+## Conclusion
+
+Using TypeScript with React improves code quality, developer experience, and helps prevent bugs. It's well worth the small learning curve to gain these benefits.
+
+In future posts, we'll dive deeper into advanced TypeScript patterns for React applications.
