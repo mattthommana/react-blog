@@ -5,10 +5,11 @@ import BlogCard from '../components/blog/BlogCard';
 import AuthorProfile from '../components/AuthorProfile';
 import LoadingSpinner from '../components/layout/LoadingSpinner';
 import Head from '../components/layout/Head';
+import { BlogPost } from '../types';
 
 const HomePage: React.FC = () => {
   const { posts, isLoading, error } = useBlog({ isPremium: false });
-  const [latestPosts, setLatestPosts] = useState([]);
+  const [latestPosts, setLatestPosts] = useState<BlogPost[]>([]);
 
   useEffect(() => {
     if (posts.length > 0) {

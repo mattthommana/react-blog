@@ -1,13 +1,21 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import { resolve } from 'path';
-import mdx from 'vite-plugin-mdx';
+import mdx from '@mdx-js/rollup';
+import remarkGfm from 'remark-gfm';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
+import rehypeHighlight from 'rehype-highlight';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    react(),
-    mdx() // Enable MDX support
+    mdx({
+      remarkPlugins: [remarkGfm, remarkMath],
+      rehypePlugins: [rehypeKatex, rehypeHighlight],
+      providerImportSource: "@mdx-js/react"
+    }),
+    react()
   ],
   resolve: {
     alias: {
@@ -33,16 +41,12 @@ export default defineConfig({
           if (id.includes('/payments/')) {
             return 'payments';
           }
+          // Group MDX content
+          if (id.includes('.mdx')) {
+            return 'content';
+          }
         }
       }
     }
-  },
-  // Configure environment variables
-  define: {
-    'import.meta.VITE_AUTH0_DOMAIN': JSON.stringify(process.env.AUTH0_DOMAIN),
-    'import.meta.VITE_AUTH0_CLIENT_ID': JSON.stringify(process.env.AUTH0_CLIENT_ID),
-    'import.meta.VITE_AUTH0_AUDIENCE': JSON.stringify(process.env.AUTH0_AUDIENCE),
-    'import.meta.VITE_STRIPE_PUBLIC_KEY': JSON.stringify(process.env.STRIPE_PUBLIC_KEY),
-    'import.meta.VITE_API_ENDPOINT': JSON.stringify(process.env.API_ENDPOINT || '/api')
   }
 });

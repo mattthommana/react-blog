@@ -5,7 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import { useSubscription } from '../context/SubscriptionContext';
 import Head from '../components/layout/Head';
 import BlogHeader from '../components/blog/BlogHeader';
-import MarkdownRenderer from '../components/blog/MarkdownRenderer';
+import MDXComponents from '../components/blog/MDXComponents';
 import LoadingSpinner from '../components/layout/LoadingSpinner';
 import ErrorMessage from '../components/layout/ErrorMessage';
 import SubscriptionCTA from '../components/payments/SubscriptionCTA';
@@ -80,6 +80,11 @@ const PremiumBlogPostPage: React.FC = () => {
     );
   }
 
+  // Similar to BlogPostPage.tsx, handle component type properly
+  const ContentComponent = typeof post.content === 'function' 
+    ? post.content as React.ComponentType
+    : null;
+
   return (
     <>
       <Head 
@@ -108,7 +113,15 @@ const PremiumBlogPostPage: React.FC = () => {
       
       <article className="max-w-3xl mx-auto mt-8">
         <BlogHeader post={post} />
-        <MarkdownRenderer content={post.content as string} />
+        <div className="prose prose-lg max-w-none dark:prose-invert">
+          <MDXComponents>
+            {ContentComponent ? (
+              <ContentComponent />
+            ) : (
+              <div>{typeof post.content === 'string' ? post.content : ''}</div>
+            )}
+          </MDXComponents>
+        </div>
       </article>
     </>
   );

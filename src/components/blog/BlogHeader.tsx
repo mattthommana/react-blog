@@ -8,7 +8,10 @@ interface BlogHeaderProps {
 }
 
 const BlogHeader: React.FC<BlogHeaderProps> = ({ post }) => {
-  const readingTime = calculateReadingTime(post.content);
+  // Check if content is a string before calculating reading time
+  const readingTime = typeof post.content === 'string' 
+    ? calculateReadingTime(post.content)
+    : 5; // Default reading time for component-based content
 
   return (
     <div className="space-y-4 mb-8">

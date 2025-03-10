@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useSubscription } from '../../context/SubscriptionContext';
 import ThemeSwitch from './ThemeSwitch';
@@ -8,8 +8,7 @@ const Header: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { isAuthenticated, user, login, logout } = useAuth();
   const { hasActiveSubscription } = useSubscription();
-  const navigate = useNavigate();
-
+  
   const menuItems = [
     { label: 'Home', href: '/' },
     { label: 'Blog', href: '/blog' },

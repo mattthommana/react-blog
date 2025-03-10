@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Navigate } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
+import Head from '../components/layout/Head'
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
 import { useAuth } from '../context/AuthContext';
 import { useSubscription } from '../context/SubscriptionContext';
@@ -111,10 +110,10 @@ const SubscriptionPage: React.FC = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Subscription | Matter St. Blog</title>
-        <meta name="description" content="Subscribe to access premium content" />
-      </Helmet>
+      <Head
+        title="Subscription | Matter St. Blog"
+        description="Subscribe to access premium content" 
+      />
 
       <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl font-semibold mb-8">

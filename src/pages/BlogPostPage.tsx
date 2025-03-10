@@ -3,7 +3,7 @@ import { useParams, Navigate, Link } from 'react-router-dom';
 import { useBlog } from '../hooks/useBlog';
 import Head from '../components/layout/Head';
 import BlogHeader from '../components/blog/BlogHeader';
-import MarkdownRenderer from '../components/blog/MarkdownRenderer';
+import MDXComponents from '../components/blog/MDXComponents';
 import LoadingSpinner from '../components/layout/LoadingSpinner';
 import ErrorMessage from '../components/layout/ErrorMessage';
 
@@ -14,6 +14,11 @@ const BlogPostPage: React.FC = () => {
   if (isLoading) return <LoadingSpinner />;
   if (error) return <ErrorMessage message={error} />;
   if (!post) return <Navigate to="/blog" />;
+
+  // In a real implementation, the MDX content would be dynamically imported
+  const ContentComponent = typeof post.content === 'function' 
+    ? post.content as React.ComponentType
+    : null;
 
   return (
     <>
@@ -43,7 +48,15 @@ const BlogPostPage: React.FC = () => {
       
       <article className="max-w-3xl mx-auto mt-8">
         <BlogHeader post={post} />
-        <MarkdownRenderer content={post.content as string} />
+        <div className="prose prose-lg max-w-none dark:prose-invert">
+          <MDXComponents>
+            {ContentComponent ? (
+              <ContentComponent />
+            ) : (
+              <div>{typeof post.content === 'string' ? post.content : ''}</div>
+            )}
+          </MDXComponents>
+        </div>
       </article>
     </>
   );

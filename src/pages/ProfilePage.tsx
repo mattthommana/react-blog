@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Navigate, Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
 import { useAuth } from '../context/AuthContext';
 import { useSubscription } from '../context/SubscriptionContext';
 import LoadingSpinner from '../components/layout/LoadingSpinner';
+import Head from '../components/layout/Head';
 
 const ProfilePage: React.FC = () => {
   const { isAuthenticated, isLoading: authLoading, user, logout } = useAuth();
@@ -32,10 +32,10 @@ const ProfilePage: React.FC = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Profile | Matter St. Blog</title>
-        <meta name="description" content="Your profile on Matter St. Blog" />
-      </Helmet>
+      <Head
+        title="Profile | Matter St. Blog"
+        description="Your profile on Matter St. Blog"
+      />
 
       <div className="max-w-3xl mx-auto">
         <h1 className="text-3xl font-semibold mb-8">Your Profile</h1>

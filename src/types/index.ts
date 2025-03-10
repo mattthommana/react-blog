@@ -1,9 +1,11 @@
+import { ComponentType } from 'react';
+
 export interface BlogPost {
   id: string;
   slug: string;
   title: string;
   description: string;
-  content: string; // Changed from string | React.ComponentType to just string
+  content: string | ComponentType;  // Can be a string or an MDX component
   author: string;
   date: string;
   tags: string[];
